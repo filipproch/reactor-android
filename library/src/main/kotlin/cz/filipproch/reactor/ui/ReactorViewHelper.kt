@@ -49,7 +49,9 @@ class ReactorViewHelper<T : IReactorTranslator>(val reactorView: ReactorView<T>)
      * TODO
      */
     fun bindTranslatorWithView(translator: T) {
-        viewBoundDisposable = CompositeDisposable()
+        if (viewBoundDisposable == null) {
+            viewBoundDisposable = CompositeDisposable()
+        }
         this.translator = translator
 
         translator.bindView(checkNotNull(eventSubject))
@@ -105,7 +107,11 @@ class ReactorViewHelper<T : IReactorTranslator>(val reactorView: ReactorView<T>)
         if (isEmittersRegistrationAllowed.not()) {
             throw IllegalLifecycleOperation("registerEmitter can be only called in onEmittersInit()")
         }
-        emitter.subscribe(emitterConsumer)
+        if (viewBoundDisposable == null) {
+            viewBoundDisposable = CompositeDisposable()
+        }
+        viewBoundDisposable?.add(
+                emitter.subscribe(emitterConsumer))
     }
 
     /**
