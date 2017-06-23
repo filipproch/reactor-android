@@ -59,7 +59,7 @@ class ReactorViewHelperTest {
         viewHelper?.registerEmitter(emitter)
     }
 
-    /*@Test TODO: update or delete
+    @Test
     fun translatorUnbindViewCalledInOnViewNotUsable() {
         // prepare for the test
         val emitter = PublishSubject.create<ReactorUiEvent>()
@@ -92,14 +92,15 @@ class ReactorViewHelperTest {
         assertThat(translator.receivedEvents).hasSize(0)
 
         // rebind view
+        viewHelper?.onReadyToRegisterEmitters()
         viewHelper?.bindTranslatorWithView(translator)
 
         // emit an event
         emitter.onNext(TestEvent)
 
         // single event should arrive
-        assertThat(translator.receivedEvents).hasSize(2)
-    }*/
+        assertThat(translator.receivedEvents).hasSize(1)
+    }
 
     /*@Test TODO: update or delete
     fun eventsAreDeliveredToTranslatorAfterUnbindAndRebind() {

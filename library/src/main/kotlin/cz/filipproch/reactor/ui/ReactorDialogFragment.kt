@@ -8,6 +8,7 @@ import cz.filipproch.reactor.base.view.ReactorUiAction
 import cz.filipproch.reactor.base.view.ReactorUiEvent
 import cz.filipproch.reactor.base.view.ReactorUiModel
 import cz.filipproch.reactor.base.view.ReactorView
+import cz.filipproch.reactor.rx.QueueObservable
 import cz.filipproch.reactor.ui.events.*
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer
@@ -23,7 +24,7 @@ abstract class ReactorDialogFragment<T : IReactorTranslator> :
     var reactorViewHelper: ReactorViewHelper<T>? = null
         private set
 
-    private val activityEventsSubject = PublishSubject.create<ReactorUiEvent>()
+    private val activityEventsSubject = QueueObservable.create<ReactorUiEvent>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -38,8 +39,6 @@ abstract class ReactorDialogFragment<T : IReactorTranslator> :
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        reactorViewHelper?.onReadyToRegisterEmitters()
-
         if (savedInstanceState != null) {
             onUiRestored(savedInstanceState)
         } else {
@@ -51,6 +50,7 @@ abstract class ReactorDialogFragment<T : IReactorTranslator> :
 
     override fun onStart() {
         super.onStart()
+        reactorViewHelper?.onReadyToRegisterEmitters()
         reactorViewHelper?.bindTranslatorWithView(
                 ReactorTranslatorHelper.getTranslatorFromFragment(childFragmentManager, translatorFactory)
         )
@@ -91,7 +91,7 @@ abstract class ReactorDialogFragment<T : IReactorTranslator> :
     }
 
     override fun dispatch(event: ReactorUiEvent) {
-        activityEventsSubject.onNext(event)
+        activityEventsSubject.emit(event)
     }
 
     override fun registerEmitter(emitter: Observable<out ReactorUiEvent>) {
