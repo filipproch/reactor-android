@@ -43,7 +43,7 @@ abstract class Presenter<M> : ViewModel() {
         return uiModelObservable
     }
 
-    abstract protected fun onCreateStreams(shared: Observable<UiEvent>): Array<Observable<Action>>
+    abstract protected fun onCreateStreams(shared: Observable<out UiEvent>): Array<Observable<out Action>>
 
     abstract protected fun stateReducer(previousState: M, action: Action): M
 
