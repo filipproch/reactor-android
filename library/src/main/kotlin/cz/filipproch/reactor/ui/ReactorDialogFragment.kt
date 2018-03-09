@@ -37,7 +37,7 @@ abstract class ReactorDialogFragment<T : IReactorTranslator> :
         reactorViewHelper = ReactorViewHelper(this)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState != null) {
             onUiRestored(savedInstanceState)

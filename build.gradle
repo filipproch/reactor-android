@@ -2,26 +2,24 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.1.2-3'
-        dokkaVersion = '0.9.14-eap-3'
+        kotlinVersion = '1.2.30'
+        dokkaVersion = '0.9.16'
 
-        supportLibraryVersion = '25.3.1'
+        supportLibraryVersion = '27.1.0'
         playServicesVersion = '10.2.1'
 
         rxBindingVersion = '2.0.0'
 
         // Library
-        libVersion = '0.6.1'
+        libVersion = '0.7.0'
     }
 
     repositories {
+        maven { url "https://maven.google.com" }
         jcenter()
-        maven {
-            url "https://dl.bintray.com/kotlin/kotlin-dev"
-        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
@@ -32,6 +30,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://maven.google.com" }
         jcenter()
     }
 }

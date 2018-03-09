@@ -33,7 +33,7 @@ abstract class ExtendedReactorDialogFragment<T : IReactorTranslator> : ReactorDi
         outState.putInt(STATE_REQUEST_CODE, requestCode)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState != null) {
             requestCode = savedInstanceState.getInt(STATE_REQUEST_CODE)

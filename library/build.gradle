@@ -5,12 +5,12 @@ apply plugin: 'jacoco-android'
 project.archivesBaseName = 'reactor-android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName libVersion
 
@@ -46,7 +46,7 @@ dependencies {
 
     // Reactive
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.6'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
 
     /*
         Test Dependencies

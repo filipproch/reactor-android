@@ -49,15 +49,15 @@ internal class TypeBehaviorSubject private constructor() : Subject<ReactorUiMode
         subject.onComplete()
     }
 
-    override fun onSubscribe(d: Disposable?) {
+    override fun onSubscribe(d: Disposable) {
         subject.onSubscribe(d)
     }
 
     override fun getThrowable(): Throwable {
-        return subject.throwable
+        return subject.throwable!!
     }
 
-    override fun onError(e: Throwable?) {
+    override fun onError(e: Throwable) {
         subject.onError(e)
     }
 
